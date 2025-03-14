@@ -9,10 +9,10 @@
                     <div class="card-body">
                         <h5 class="card-title text-primary">Data Pengaduan Kabupaten Kuningan 🎉</h5>
                         <p class="mb-4">
-                        Pengaduan hari ini <span class="fw-bold">{{ count($laporan) }}</span>
+                        Pengaduan hari ini <span class="fw-bold">{{ $laporanHariIni }}</span>
                         </p>
     
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">Lihat Tabel Pengaduan</a>
+                        <a href="/pengaduan" class="btn btn-sm btn-outline-primary">Lihat Tabel Pengaduan</a>
                     </div>
                     </div>
                     <div class="col-sm-5 text-center text-sm-left">
@@ -59,7 +59,7 @@
                             </div>
                             <div class="d-flex flex-column">
                                 <small>Februari</small>
-                                <h6 class="mb-0">7 Pengaduan</h6>
+                                <h6 class="mb-0">{{ $jumlahBulanLalu }} Pengaduan</h6>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -68,7 +68,7 @@
                             </div>
                             <div class="d-flex flex-column">
                                 <small>Maret</small>
-                                <h6 class="mb-0">15 Pengaduan</h6>
+                                <h6 class="mb-0">{{ $jumlahBulanIni }} Pengaduan</h6>
                             </div>
                         </div>
                     </div>
@@ -83,45 +83,36 @@
                         <table class="table table-striped datatable display nowrap">
                             <thead>
                             <tr>
+                                <th>#</th>
+                                <th>Nomor Laporan</th>
                                 <th>Nama</th>
                                 <th>Alamat</th>
-                                <th>Penaduan</th>
+                                <th>Pengaduan</th>
                                 <th>Status</th>
-                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
+                                @php
+                                    $i = 1;
+                                @endphp
                                 @foreach ($laporan as $data)
                                     <tr>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $data->nama }}</strong></td>
-                                    <td>{{ $data->alamat }}</td>
-                                    <td>{{ $data->pengaduan }}</td>
-                                    <td>
-                                        @if ($data->validasi == "Proses")
-                                        <span class="badge bg-label-info me-1">Proses</span>
-                                        @elseif($data->validasi == "Selesai")
-                                        <span class="badge bg-label-success me-1">Selesai</span>
-                                        @elseif($data->validasi == "Tertunda")
-                                        <span class="badge bg-label-warning me-1">Tertunda</span>
-                                        @elseif($data->validasi == "Tidak Valid")
-                                        <span class="badge bg-label-danger me-1">Tidak Valid</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                            ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                            >
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                            ><i class="bx bx-trash me-1"></i> Delete</a
-                                            >
-                                        </div>
-                                        </div>
-                                    </td>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $data['nomor_laporan'] }}</td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $data['nama'] }}</strong></td>
+                                        <td>{{ $data['alamat'] }}</td>
+                                        <td>{{ $data['judul'] }}</td>
+                                        <td>
+                                            @if ($data['status'] == "Proses")
+                                            <span class="badge bg-label-info me-1">Proses</span>
+                                            @elseif($data['status'] == "Selesai")
+                                            <span class="badge bg-label-success me-1">Selesai</span>
+                                            @elseif($data['status'] == "Menunggu")
+                                            <span class="badge bg-label-warning me-1">Menunggu</span>
+                                            @elseif($data['status'] == "Tidak Valid")
+                                            <span class="badge bg-label-danger me-1">Tidak Valid</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

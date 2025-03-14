@@ -16,5 +16,6 @@ Route::get('/file/{filename}', function ($filename) {
 
 Route::resource('/', WhatsAppController::class);
 Route::resource('/pengaduan', TabelController::class);
+Route::post('/pengaduan/export', [TabelController::class, 'export'])->name('pengaduan.export');
 
 

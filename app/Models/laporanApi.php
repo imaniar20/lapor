@@ -10,7 +10,7 @@ class laporanApi extends Model
 {
     public function getLaporanApi(){
         try {
-            $response = Http::timeout(30)->get("http://localhost:3060/api/laporan");
+            $response = Http::timeout(30)->get("http://localhost:3090/api/laporan");
             $data = $response['data'];
             $collection = collect($data);
     

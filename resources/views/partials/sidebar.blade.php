@@ -16,7 +16,7 @@
 
     <ul class="menu-inner py-1 mt-4">
       <!-- Dashboard -->
-      <li class="menu-item active">
+      <li class="menu-item {{ ($title == 'Dashboard')? 'active' : ''; }}">
         <a href="/" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
@@ -24,14 +24,14 @@
       </li>
 
       <!-- Layouts -->
-      <li class="menu-item">
+      <li class="menu-item {{ ($title == 'Tabel')? 'active open' : ''; }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Tabel</div>
         </a>
 
         <ul class="menu-sub">
-          <li class="menu-item">
+          <li class="menu-item {{ ($menu == 'Pengaduan')? 'active' : ''; }}">
             <a href="/pengaduan" class="menu-link">
               <div data-i18n="Without menu">Pengaduan</div>
             </a>

@@ -4,13 +4,14 @@
 <div class="card mb-4 order-0">
   <h5 class="card-header">Table Pengaduan</h5>
   <div class="card-body">
+    <a class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#export"><i class='bx bxs-file-pdf'></i>Export PDF</a>
     <div class="table-responsive p-2">
         <table class="table table-striped datatable display nowrap">
       <thead>
         <tr>
           <th>No</th>
           <th>No Laporan</th>
-          <th>NIK</th>
+          <th>tanggal</th>
           <th>Nama</th>
           <th>No Telp</th>
           <th>Kategori</th>
@@ -25,11 +26,11 @@
         @endphp
         @foreach ($laporan as $data)
           <tr>
-            <th>{{ $i++ }}</th>
-            <th>{{ $data['nomor_laporan'] }}</th>
-            <td>+{{ $data['nomor_pelapor'] }}</td>
-            <th>{{ $data['nik'] }}</th>
+            <td>{{ $i++ }}</td>
+            <td>{{ $data['nomor_laporan'] }}</td>
+            <td>{{ \Carbon\Carbon::parse($data['tanggal'])->format('d M Y') }}</td>
             <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $data['nama'] }}</strong></td>
+            <td>+{{ $data['nomor_pelapor'] }}</td>
             <td>{{ $data['kategori'] }}</td>
             <td>{{ $data['judul'] }}</td>
             <td>
@@ -166,6 +167,23 @@
           </div>
       </form>
   </div>
+</div>
+
+<div class="modal fade" id="export" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form class="modal-content" method="POST" action="{{ route('pengaduan.export') }}" id="edit" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-body">
+                <label for="date1" class="form-label">Tanggal Awal</label>
+                <input type="date" name="date1" id="date1" class="form-control mb-3" required>
+
+                <label for="date2" class="form-label">Tanggal Akhir</label>
+                <input type="date" name="date2" id="date2" class="form-control mb-3" required>
+
+                <button type="submit" class="btn btn-success">Cetak</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>

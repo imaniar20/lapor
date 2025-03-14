@@ -30,7 +30,7 @@
             $('.datatable').each(function() {
                 if (!$.fn.DataTable.isDataTable(this)) {
                     new DataTable(this, {
-                        ordering: false
+                        // ordering: false
                     });
                 }
             });
