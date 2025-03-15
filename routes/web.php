@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use App\Models\Laporan;
 use App\Models\laporanApi;
 use App\Http\Controllers\TabelController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannedController;
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -23,7 +25,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', function () {
             $laporanApi = new laporanApi();
             $laporan = $laporanApi->getLaporanApi();
-
             $today = now()->toDateString();
             $laporanHariIni = collect($laporan)->filter(function ($data) use ($today) {
                 return \Carbon\Carbon::parse($data['tanggal'])->toDateString() === $today;
@@ -101,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
                 "Infrastruktur" => 0,
                 "Pendidikan" => 0,
                 "Kesehatan" => 0,
+                "Pelayanan ASN" => 0,
                 "Penerangan Jalan Umum" => 0,
             ];
             $kategoriSummary = array_merge($defaultKategories, $kategori->all());
@@ -127,4 +129,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::resource('/pengaduan', TabelController::class);
     Route::post('/pengaduan/export', [TabelController::class, 'export'])->name('pengaduan.export');
+    
+    Route::resource('/admin_user', AdminController::class);
+    Route::resource('/banned_user', BannedController::class);
 });

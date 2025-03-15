@@ -52,12 +52,12 @@ class TabelController extends Controller
         ]);
 
         // URL API Node.js
-        $url = "http://localhost:3060/api/laporan/{$id}";
+        $url = "http://157.15.124.34:3030/api/laporan/{$id}";
 
         // Kirim PUT request ke API Node.js
         try {
             $response = Http::put($url, $data);
-
+            dd($response);
             if ($response->successful()) {
                 return redirect('/pengaduan')->with('success', 'Laporan berhasil diubah.');
             }

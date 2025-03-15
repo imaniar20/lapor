@@ -320,6 +320,22 @@
                                 </div>
                                 </div>
                             </li>
+                            <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                <span class="avatar-initial rounded bg-label-primary"
+                                    ><i class='bx bxs-bank' ></i></i
+                                ></span>
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                    <h6 class="mb-0">Layanan ASN</h6>
+                                    <small class="text-muted">Layanan mencakup berbagai layanan administratif dan publik yang berhubungan dengan birokrasi pemerintahan.</small>
+                                </div>
+                                <div class="user-progress">
+                                    <small class="fw-semibold text-primary">{{ $kategori['Pelayanan ASN'] }} Pengaduan</small>
+                                </div>
+                                </div>
+                            </li>
                             <li class="d-flex">
                                 <div class="avatar flex-shrink-0 me-3">
                                 <span class="avatar-initial rounded bg-label-warning"
@@ -343,7 +359,11 @@
             </div>
         </div>
     </div>
-
+    <?php
+    foreach($kategoriThisMonth as $data => $value){
+        echo $data . " - " . $value . ",";
+    }
+?>
     <script>
         (function () {
             let cardColor, headingColor, axisColor, shadeColor, borderColor;
@@ -699,82 +719,79 @@
                 growthChart.render();
             }
 
-            const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
-            orderChartConfig = {
-            chart: {
-                height: 165,
-                width: 130,
-                type: 'donut'
-            },
-            labels: [
-                <?php
-                    foreach($kategoriThisMonth as $data => $value){
-                        echo "'" . $data . "',";
+            const chartOrderStatistics = document.querySelector('#orderStatisticsChart');
+
+            if (chartOrderStatistics) {
+                // Konfigurasi chart
+                const orderChartConfig = {
+                chart: {
+                    height: 165,
+                    width: 130,
+                    type: 'donut'
+                },
+                // Menghasilkan label dari array kunci PHP
+                labels: [
+                    <?php echo "'" . implode("','", array_keys($kategoriThisMonth)) . "'"; ?>
+                ],
+                // Menghasilkan data series dari nilai PHP
+                series: [
+                    <?php echo implode(",", $kategoriThisMonth); ?>
+                ],
+                // Warna ditentukan secara manual
+                colors: ['rgb(133, 146, 163)', 'rgb(3, 195, 236)', 'rgb(3, 195, 236)', 'rgb(105, 108, 255)', 'rgb(105, 108, 255)'],
+                stroke: {
+                    width: 6,
+                    colors: ['#fff']
+                },
+                dataLabels: {
+                    enabled: false,
+                    formatter: function (val) {
+                    return parseInt(val);
                     }
-                ?>
-            ],
-            series: [
-                <?php
-                    foreach($kategoriThisMonth as $data => $value){
-                        echo $value . ",";
+                },
+                legend: {
+                    show: false
+                },
+                grid: {
+                    padding: {
+                    top: 0,
+                    bottom: 0,
+                    right: 15
                     }
-                ?>
-            ],
-            colors: [config.colors.secondary, config.colors.info, config.colors.danger, config.colors.warning],
-            stroke: {
-                width: 5,
-                colors: cardColor
-            },
-            dataLabels: {
-                enabled: false,
-                formatter: function (val, opt) {
-                return parseInt(val);
-                }
-            },
-            legend: {
-                show: false
-            },
-            grid: {
-                padding: {
-                top: 0,
-                bottom: 0,
-                right: 15
-                }
-            },
-            plotOptions: {
-                pie: {
-                donut: {
-                    size: '75%',
-                    labels: {
-                    show: true,
-                    value: {
-                        fontSize: '1.5rem',
-                        fontFamily: 'Public Sans',
-                        color: headingColor,
-                        offsetY: -15,
-                        formatter: function (val) {
-                        return parseInt(val);
-                        }
-                    },
-                    name: {
-                        offsetY: 20,
-                        fontFamily: 'Public Sans'
-                    },
-                    total: {
+                },
+                plotOptions: {
+                    pie: {
+                    donut: {
+                        size: '75%',
+                        labels: {
                         show: true,
-                        fontSize: '0.8125rem',
-                        color: axisColor,
-                        label: '{{ date('M-Y') }}',
-                        formatter: function (w) {
-                        return {{ $jumlahBulanIni }};
+                        value: {
+                            fontSize: '1.5rem',
+                            color: '#000',
+                            offsetY: -15,
+                            formatter: function (val) {
+                            return parseInt(val);
+                            }
+                        },
+                        name: {
+                            offsetY: 20
+                        },
+                        total: {
+                            show: true,
+                            fontSize: '0.8125rem',
+                            color: '#000',
+                            label: '<?php echo date("M-Y"); ?>',
+                            formatter: function (w) {
+                            return <?php echo $jumlahBulanIni; ?>;
+                            }
+                        }
                         }
                     }
                     }
                 }
-                }
-            }
-            };
-            if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
+                };
+
+                // Membuat dan merender chart
                 const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
                 statisticsChart.render();
             }

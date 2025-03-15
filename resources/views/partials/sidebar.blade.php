@@ -36,11 +36,16 @@
               <div data-i18n="Without menu">Pengaduan</div>
             </a>
           </li>
-          {{-- <li class="menu-item">
-            <a href="#" class="menu-link">
-              <div data-i18n="Without navbar">Reprt</div>
+          <li class="menu-item {{ ($menu == 'Admin User')? 'active' : ''; }}">
+            <a href="/admin_user" class="menu-link">
+              <div data-i18n="Without navbar">Admin</div>
             </a>
-          </li> --}}
+          </li>
+          <li class="menu-item {{ ($menu == 'Banned User')? 'active' : ''; }}">
+            <a href="/banned_user" class="menu-link">
+              <div data-i18n="Without navbar">Banned User</div>
+            </a>
+          </li>
         </ul>
       </li>
 {{-- 

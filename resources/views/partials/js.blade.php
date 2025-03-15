@@ -32,6 +32,27 @@
                 }
             });
         });
+
+        function confirmDelete(event) {
+            event.preventDefault();  // Mencegah form mengirimkan data sebelum konfirmasi
+        
+            // Menampilkan SweetAlert konfirmasi
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data yang dihapus tidak dapat dipulihkan!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonColor: "#3085d6",
+                confirmButtonColor: "#d33",
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika konfirmasi diterima, kirimkan form untuk menghapus
+                    event.target.closest('form').submit();
+                }
+            });
+        }
     </script>
 
     @if (session('success'))
