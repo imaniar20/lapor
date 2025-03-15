@@ -33,8 +33,40 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Vendors JS -->
+<script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
 <!-- SweetAlert2 CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
 
 {{-- datatable --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<style>
+  .loading {
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(180deg); }
+  }
+
+  .warning {
+    animation: blink 1s infinite alternate;
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+
+  .done {
+    animation: pop 0.5s ease-in-out;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+</style>

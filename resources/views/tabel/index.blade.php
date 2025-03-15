@@ -173,6 +173,11 @@
     <div class="modal-dialog modal-lg">
         <form class="modal-content" method="POST" action="{{ route('pengaduan.export') }}" id="edit" enctype="multipart/form-data">
             @csrf
+            <div class="modal-header">
+                {{-- <h5 class="modal-title" id="backDropModalTitle">Data Laporan</h5> --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input type="hidden" name="id" id="id">
+            </div>
             <div class="modal-body">
                 <label for="date1" class="form-label">Tanggal Awal</label>
                 <input type="date" name="date1" id="date1" class="form-control mb-3" required>

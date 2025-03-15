@@ -7,7 +7,7 @@
     <style>
         body { font-family: sans-serif; font-size: 12px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        table, th, td { border: 1px solid black; padding: 5px;  }
+        table, th, td {   }
         th { background-color: #f2f2f2; text-align: center;}
         td { text-align: left; }
         /* Jika tabel masih terlalu lebar, tambahkan overflow */
@@ -19,7 +19,7 @@
 </head>
 <body>
     <h2 style="text-align: center">{{ $title }}</h2>
-    <table style="width: 40%; border: 0px solid rgb(255, 255, 255);">
+    <table style="width: 40%;">
         <tbody>
             <tr>
                 <td>Tanggal</td>
@@ -43,7 +43,7 @@
             </tr>
         </tbody>
     </table>
-    <table>
+    <table border="2px" style="border: 1px solid black; padding: 5px;">
         <thead>
             <tr>
                 <th rowspan="2">No</th>

@@ -17,30 +17,21 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-        <title>Dashboard - Lapor</title>
+        <title>Login - Lapor</title>
 
         <meta name="description" content="" />
         
         @include('partials.css')
+        <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+
     </head>
     
 
     <body>
-        <div class="layout-wrapper layout-content-navbar">
-            <div class="layout-container">
-                @include('partials.sidebar')
-                
-                <div class="layout-page">
-                    @include('partials.navbar')
-
-                    <div class="content-wrapper">
-                        <div class="container-xxl flex-grow-1 container-p-y">
-                            @yield('Content')
-                        </div>
-
-                        @include('partials.footer')
-                        <div class="content-backdrop fade"></div>
-                    </div>
+        <div class="container-xxl">
+            <div class="authentication-wrapper authentication-basic container-p-y">
+                <div class="authentication-inner">
+                    @yield('Content')
                 </div>
             </div>
         </div>
